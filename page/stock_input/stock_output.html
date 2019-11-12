@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 原有样式 -->
+  <link href="../../src/css/all.css" rel="stylesheet" >
+  <link href="../../src/css/UI.css" rel="stylesheet" >
+  <link href="../../src/css/style.css" rel="stylesheet" >
+  <link href="../../src/css/WdatePicker.css" rel="stylesheet" >
+  <link href="../../src/css/his.css" rel="stylesheet" >
+  <!-- 新增样式 -->
+  <link href="../../src/css/stock_input/pop.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/form.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/stock_input.css" rel="stylesheet" >
+
+</head>
+<body>
+
+
+<div class="h_c_regist h_drugstore" >
+  <!---->
+  
+  <div class="h_regist_head" >
+    <form action="" id="" method="post">
+      <div class="stock_input clearf" >
+        <div class="form_group fl"> <span>出库科室：</span>
+          <div class="form_select">
+            <select class="select_1st" style="line-height: normal">
+              <option value="">计免科</option>
+              <option value="m">计免科1</option>
+              <option value="f">计免科2</option>
+              <option value="m">计免科3</option>
+              <option value="f">计免科4</option>
+              <option value="m">计免科</option>
+              <option value="f">计免科</option>
+              <option value="f">计免科4</option>
+              <option value="m">计免科</option>
+              <option value="f">计免科</option>
+              <option value="f">计免科4</option>
+              <option value="m">计免科</option>
+              <option value="f">计免科</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" style="display: none"> <span>供货商：</span>
+          <div class="form_select">
+            <select class="select_2nd">
+              <option value="">计免科</option>
+              <option value="m">计免科</option>
+              <option value="f">计免科</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" >
+          <span>出库日期：</span>
+          <input type="text" name="" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" value="">
+          <em>至</em>
+          <input type="text" name="" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" value="">
+        </div>
+      </div>
+      <div class="stock_input clearf" >
+        <div class="form_group fl" >
+          <span>&nbsp;&nbsp;单据号：</span>
+          <input class="i_w190 form_text" value="" type="text" name="txt_goods_name" placeholder="请输入单据号. . .">
+        </div>
+        <div class="form_group fl"> <span>单据状态：</span>
+          <div class="form_select">
+            <select class="select_1st">
+              <option value="">计免科</option>
+              <option value="m">计免科</option>
+              <option value="f">计免科</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" >
+          <input class="input_btn btn_b36 radius3" type="submit" value="查询">
+        </div>
+        <div class="form_group fl" >
+          <input class="input_btn btn_b36 radius3" id="add_drug" type="button" value="新建">
+        </div>
+        <div class="form_group fl" >
+          <input class="input_btn btn_b36 radius3" type="button" value="清空">
+        </div>
+        <div class="form_group fl" >
+          <input class="input_btn btn_b36 radius3" style="display: none;" type="submit" value="引入订购单">
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!---->
+  <div class="h_pat_table h_regist_table" >
+    <table border="0" width="100%" >
+      <tbody>
+      <tr class="g_thead" >
+        <th width="8%" >验收科室</th>
+        <th width="8%" >单据号</th>
+        <th width="11%" >成本金额</th>
+        <th width="6%" >登记时间</th>
+        <th width="6%" >登记人员</th>
+        <th width="11%" >出库时间</th>
+        <th width="5%" >出库人员</th>
+        <th width="11%" >状态</th>
+        <th width="9%" >操作</th>
+      </tr>
+      <tr class="g_tbody" >
+        <td><?= $info['drug_name'] ?></td>
+        <td><?= $info['type_input'] ?></td>
+        <td><?= $info['type_input'] ?></td>
+        <td style="text-align: left;"><div title="<?= $info['type_input'] ?>" style="margin-left:5px"><?= $info['type_input'] ?></div></td>
+        <td><?= $info->price_in ?>元</td>
+        <td><input type="text" id="txt_<?= $info['id'] ?>" value="<?= $info['id'] ?>" style="border: 1px #dedede solid; margin-left:5px; "> <input type="hidden" id="hid_<?= $info['id'] ?>" value="<?= $info['id'] ?>">元</td>
+        <td><input type="text" id="txtmember_<?= $info['id'] ?>" value="<?= $info['id'] ?>" style="border: 1px #dedede solid; margin-left:5px; ">元</td>
+        <td><input type="text" id="txtnum_<?= $info['id'] ?>" value="<?= $info['id'] ?>" style="border: 1px #dedede solid; margin-left:5px; width:30px; "></td>
+        <td>
+          <a href="###" class="edit_stock_input" >修改</a>
+          <a href="###" onclick="$.delStockInputList('44', '1')" >删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!---->
+</div>
+
+<!-- 原有JS -->
+<script src="../../src/js/jquery-1.10.2.min.js"></script>
+<script src="../../src/js/WdatePicker.js"></script>
+<!-- 新增JS -->
+<script src="../../src/js/stock_input/jquery-loading.js"></script>
+<script src="../../src/js/stock_input/jquery-inputtips.js"></script>
+<script src="../../src/js/stock_input/pop.js"></script>
+<script src="../../src/js/stock_input/mini-tpl.js"></script>
+<script src="../../src/js/stock_input/tpl_output.js"></script>
+<script src="../../src/js/stock_input/config.js"></script>
+<script src="../../src/js/stock_input/events_output.js"></script>
+<script src="../../src/js/stock_input/stock_output.js"></script>
+
+</body>
+</html>

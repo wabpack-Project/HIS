@@ -1,0 +1,7 @@
+/* 表格 头和表格分离 */
+.grid { }
+.grid_head { padding-right: 18px; background: #f4f4f4; }
+.grid_body { height: 400px; overflow-y: scroll; }
+
+
+

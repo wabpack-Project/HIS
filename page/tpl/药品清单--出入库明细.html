@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 原有样式 -->
+  <link href="../../src/css/all.css" rel="stylesheet" >
+  <link href="../../src/css/UI.css" rel="stylesheet" >
+  <link href="../../src/css/style.css" rel="stylesheet" >
+  <link href="../../src/css/WdatePicker.css" rel="stylesheet" >
+  <link href="../../src/css/his.css" rel="stylesheet" >
+  <!-- 新增样式 -->
+  <link href="../../src/css/stock_input/pop.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/form.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/stock_input.css" rel="stylesheet" >
+
+</head>
+<body>
+
+<div class="pop_drug_head">
+  <span class="pop_drug_tit">出入库明细</span>
+  <a class="radius30 close" id="pop-close" href="javascript:;">x</a>
+</div>
+
+<div id="stock_output" class="h_c_regist h_drugstore" >
+  <!-- 入库表单 -->
+  <div class="h_regist_head" >
+    <div class="stock_input clearf" >
+      <div class="form_group fl"> <span>科室：</span>
+        <div class="form_select">
+          <select id="get_department" class="select_3rd form_select" disabled >
+            <%
+            var i, departmentData = data.department_arr;
+            for(i in departmentData){
+            if(data.data.department_name == departmentData[i]) {
+            %>
+            <option selected attr_id="<%=i%>" value="<%=i%>"><%=departmentData[i]%></option>
+            <%}else{%>
+            <option attr_id="<%=i%>" value="<%=i%>"><%=departmentData[i]%></option>
+            <%}%>
+            <% } %>
+          </select>
+        </div>
+      </div>
+      <div class="form_group fl" > <span>操作类型：</span>
+        <div class="form_select">
+          <select id="get_supplier"  class="select_4th form_select" disabled>
+            <option attr_id="" value=""></option>
+            <%
+            var m, typeData = data.type_arr;
+            for(m in typeData){
+            if(data.data.type_name == typeData[m]) {
+            %>
+            <option selected attr_id="<%=m%>" value="<%=m%>"><%=typeData[m]%></option>
+            <%}else{%>
+            <option attr_id="<%=m%>" value="<%=m%>"><%=typeData[m]%></option>
+            <%}%>
+            
+            <% } %>
+          </select>
+        </div>
+      </div>
+      <div class="form_group fl" style="display: none" >
+        <span>规格：</span>
+        <%
+        var document_no = data.data.document_no;
+        var remark = data.data.remark;
+        if(!document_no) document_no = "";
+        if(!remark) remark = "";
+        %>
+        <input id="set_document_no" class="i_w190 form_text1" value="<%=document_no%>" type="text" name="txt_goods_name" placeholder="" disabled >
+      </div>
+    </div>
+    <div class="stock_input clearf" style="display: none" >
+      <div class="form_group fl" >
+        <span>药品名称：</span>
+        <input class="i_w400 input_remark" value="<%=remark%>" type="text" name="txt_goods_name" placeholder="" autocomplete="off" >
+      </div>
+    </div>
+  </div>
+  <!-- 药品列表 -->
+  <div class="h_pat_table h_drug_table" >
+    <table border="0" width="100%" >
+      <tbody id="drug_table">
+      <tr class="g_thead" >
+        <th width="8%" >单据号</th>
+        <th width="26%" >药品名称</th>
+        <th width="8%" >规格</th>
+        <th width="8%" >批次</th>
+        <th width="8%" >有效期</th>
+        <th width="8%" >数量</th>
+        <th width="8%" >单位</th>
+        <th width="8%" >成本单价</th>
+        <th width="8%" >操作员</th>
+        <th width="12%" >操作时间</th>
+      </tr>
+      <%
+      var j, drugData = data.data.detail;
+      if(!drugData || drugData.length == 0) {
+      %>
+      <tr class="g_tbody no_drug_list" >
+        <td class="" colspan="11">没有数据</td>
+      </tr>
+      <% } else {
+      for(j in drugData){ %>
+      <tr class="g_tbody" id="drug_<%=j%>" >
+        <td><%=drugData[j].document_no||""%></td>
+        <td><%=drugData[j].drug_name||""%></td>
+        <td><%=drugData[j].drug_spec||""%></td>
+        <td><%=drugData[j].batch_no||""%></td>
+        <td><%=drugData[j].valid_date||""%></td>
+        <td><%=drugData[j].number||""%></td>
+        <td><%=drugData[j].drug_unit||""%></td>
+        <td><%=drugData[j].price_check||""%></td>
+        <td><%=drugData[j].verify_name||""%></td>
+        <td><%=drugData[j].verify_date||""%></td>
+      </tr>
+      <% } } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 原有JS -->
+<script src="../../src/js/jquery-1.10.2.min.js"></script>
+<script src="../../src/js/WdatePicker.js"></script>
+<script src="../../src/js/stock_input/jquery-inputtips.js"></script>
+<!-- 新增JS -->
+<script src="../../src/js/stock_input/pop.js"></script>
+<script src="../../src/js/stock_input/mini-tpl.min.js"></script>
+<script src="../../src/js/stock_input/stock_input.js"></script>
+
+<script>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+/* CSS Document */
+* { margin:0; padding:0; }
+p { line-height:36px; }
+.dn {
+    display: none;
+}
+.mt10 {
+    margin-top: 10px;
+}
+/* textarea样式控制隐藏 */
+#pop-code-bar ,#pop-code-adorn ,#pop-code-search ,#pop-code-cont ,#pop-code-operate { display:none; }
+.pop-code { margin:20px auto 0; padding:20px; width:1068px; background:#fff; border: 1px solid #ccc; display:none; }
+.pop-code textarea { width:94%; min-height:88px; padding:8px 3%; margin:5px 0; }
+/*  */
+.test { color:#F41F23; }
+
+/* 弹出统一样式 */
+#pop-mask {
+	position: absolute;
+	z-index: 2000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 0;
+	background: black;
+}
+.pop-out {
+	padding: 5px;
+	background: #eee;
+	box-shadow: 0 0 6px rgba(0,0,0,.5);
+	position: absolute;
+	z-index: 2000;
+	left: -9999px;
+}
+.pop-in {
+	background: #fafafa;
+	border: 1px solid #ccc;
+}
+.pop-bar {
+	border-bottom: 1px solid #ddd;
+	background: #f0f0f0;
+	background: -moz-linear-gradient(top, #fafafa, #eee);
+	background: -o-linear-gradient(top, #fafafa, #eee);
+	background: -webkit-linear-gradient(top, #fafafa, #eee);
+	background: linear-gradient(top, #fafafa, #eee);
+}
+.bar-title {
+	line-height: 24px;
+	padding-left: 10px;
+	margin: 0;
+	font-weight: normal;
+	font-size: 1em;
+}
+.pop-close {
+	position: relative;
+}
+.pop-close a {
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	margin-top: -22px;
+	color: #34538b;
+	font: bold 1em/20px Tahoma;
+	text-decoration: none;
+	cursor: pointer;
+	position: absolute;
+	right: 6px;
+}
+.pop-close a:hover {
+	text-decoration: none;
+	color: #f30;
+}
+.pop-cont {
+	background: white;
+}
+.wrap_remind {
+	width: 16em;
+	padding: 30px 40px;
+}
+.wrap_remind p {
+	margin: 10px 0 0;
+}
+.submit_btn, .cancel_btn {
+	display: inline-block;
+	padding: 3px 12px 1.99px;
+	line-height: 16px;
+	border: 1px solid;
+	cursor: pointer;
+	overflow: visible;
+}
+.submit_btn {
+	background: #486aaa;
+	border-color: #a0b3d6 #34538b #34538b #a0b3d6;
+	color: #f3f3f3;
+}
+.submit_btn:hover {
+	text-decoration: none;
+	color: #fff;
+}
+.cancel_btn {
+	background: #eee;
+	border-color: #f0f0f0 #bbb #bbb #f0f0f0;
+	color: #333;
+}
+
+/*头部*/
+/* theme 1 */
+.pop_bar { position:relative; padding:10px 0; line-height:30px; background:#0785fd; color:#fff; font-size:14px; }
+.pop_bar a { position:absolute; right:-20px; top:-20px; background:#fff; width:40px; height:40px; line-height:30px; text-align:center; font-size:24px; color:#000; }
+.pop_search { padding:10px 20px; }
+.pop_operate { padding:10px 0; background:#0785fd; }
+.pop_operate input { float:right; background:#fff; color:#0785fd; font-size:14px; }
+.pop_operate p { line-height:36px; text-align:right; padding-right:220px; color:#fff; }
+.pop_adorn { }
+.pop_cont { }
+
+
+
+

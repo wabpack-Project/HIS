@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 原有样式 -->
+  <link href="../../src/css/all.css" rel="stylesheet" >
+  <link href="../../src/css/UI.css" rel="stylesheet" >
+  <link href="../../src/css/style.css" rel="stylesheet" >
+  <link href="../../src/css/WdatePicker.css" rel="stylesheet" >
+  <link href="../../src/css/his.css" rel="stylesheet" >
+  <!-- 新增样式 -->
+  <link href="../../src/css/stock_input/pop.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/form.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/stock_input.css" rel="stylesheet" >
+
+</head>
+<body>
+
+<!-- 药品检索列表 -- 最终版 -->
+<script>
+<%
+var i=data.length;
+if(i == 0){
+%>
+<div class="nolist">没有找到这个药品</div>
+<%
+} else {
+var item = data[0];
+%>
+
+<div class="nolist"><%=item.goods_name||""%></div>
+
+<% } %>
+</script>
+
+<!-- 药品检索列表1 -->
+<script>
+<%
+var i=data.length;
+if(i == 0){
+%>
+<div class="nolist">没有找到这个药品</div>
+        <%
+} else {
+%>
+<table style="width: 100%">
+  <tr>
+  <th  width="27%" >药品名称</th>
+  <th  width="10%">规格</th>
+  <th  width="9%">医嘱分类</th>
+  <th  width="9%">单位</th>
+  <th  width="9%">成本单价</th>
+  <th  width="9%">零售单价</th>
+  <th  width="27%">生产厂商</th>
+  </tr>
+  <%
+  for(; i>0; i--){
+      var item = data[i-1];
+  %>
+  <tr class="auto_complates" attr_id="<%=item.id||''%>" data-name="<%=item.goods_name||''%>">
+      <td><%=item.goods_name||""%></td>
+      <td><%=item.spec||""%></td>
+      <td><%=item.drug_type||""%></td>
+      <td><%=item.unit||""%></td>
+      <td><%=item.price_buy||""%></td>
+      <td><%=item.price||""%></td>
+      <td><%=item.factory||""%></td>
+  </tr>
+  <%}%>
+</table>
+<% } %>
+</script>
+
+<!-- 原有JS -->
+<script src="../../src/js/jquery-1.10.2.min.js"></script>
+<script src="../../src/js/WdatePicker.js"></script>
+<!-- 新增JS -->
+<script src="../../src/js/stock_input/jquery-inputtips.js"></script>
+<script src="../../src/js/stock_input/pop.js"></script>
+<script src="../../src/js/stock_input/mini-tpl.js"></script>
+<script src="../../src/js/stock_input/tpl.js"></script>
+<script src="../../src/js/stock_input/config.js"></script>
+<script src="../../src/js/stock_input/events.js"></script>
+<script src="../../src/js/stock_input/stock_input.js"></script>
+
+</body>
+</html>

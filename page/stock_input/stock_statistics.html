@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 原有样式 -->
+  <link href="../../src/css/all.css" rel="stylesheet" >
+  <link href="../../src/css/UI.css" rel="stylesheet" >
+  <link href="../../src/css/style.css" rel="stylesheet" >
+  <link href="../../src/css/WdatePicker.css" rel="stylesheet" >
+  <link href="../../src/css/his.css" rel="stylesheet" >
+  <!-- 新增样式 -->
+  <link href="../../src/css/stock_input/pop.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/print.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/form.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/Tab.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/table.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/stock_input.css" rel="stylesheet" >
+
+</head>
+<body>
+
+
+<div class="h_c_regist h_drugstore" >
+  <!-- 表单筛选 -->
+  <div class="h_regist_head" >
+    <form action="" id="" method="post">
+      <div class="stock_input clearf" >
+        <div class="form_group fl"> <span>科室：</span>
+          <div class="form_select">
+            <select id="department_name" class="select_1st" >
+              <option value="">计免科</option>
+              <option value="m">计免科1</option>
+              <option value="f">计免科2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" >
+          <span>开始时间：</span>
+          <input type="text" name="" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate start_data" value="" autocomplete="off">
+          <em>至</em>
+          <input type="text" name="" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate end_data" value="">
+        </div>
+      </div>
+      <div class="stock_input clearf" >
+        <div class="form_group fl" >
+          <span>&nbsp;&nbsp;药品名称：</span>
+          <input id="drug_name" class="i_w190 form_text" value="" type="text" name="drug_name" placeholder="请输入药品名称. . .">
+          <input id="drug_id" type="hidden" value="" name="drug_id" >
+        </div>
+        <div class="form_group fl"> <span>操作类型：</span>
+          <div class="form_select">
+            <select id="type_name" class="select_1st">
+              <option value="">全部</option>
+              <option value="m">计免科1</option>
+              <option value="f">计免科2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" >
+          <input class="input_btn btn_b36 radius3" type="submit" value="查询">
+        </div>
+        <div class="form_group fl" >
+          <input id="clear_from" class="input_btn btn_b36 radius3" type="button" value="清空">
+        </div>
+        <div class="form_group fl" >
+          <input id="profile_print" class="input_btn btn_b36 radius3" type="button" value="打印药品清单">
+        </div>
+        <div class="form_group fl" >
+          <input id="home_print" class="input_btn btn_b36 radius3" type="button" value="打印汇总清单">
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--选项卡切换-->
+  <div class="h_pat_table h_regist_table" >
+  
+    <div class="tab_head">
+      <ul class="tab_list clearfix">
+        <li><a href="javascript:;" >汇总清单</a> </li>
+        <li class="cur"><a href="javascript:;" >药品清单</a></li>
+      </ul>
+      <div class="tab_other">成本金额：110185.87元</div>
+    </div>
+  
+    <div class="tab_body">
+      <div class="tab_con">
+        <div class="grid_head">
+          <table border="0" width="100%">
+            <tbody>
+              <tr class="g_thead">
+                <th width="32%" >科室</th>
+                <th width="34%" >操作类型</th>
+                <th width="34%" >成本金额</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid_body">
+          <table border="0" width="100%">
+            <tbody>
+              <col width="32%" align="left" />
+              <col width="34%" align="left" />
+              <col width="34%" align="right" />
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>363.00</td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>期初入库</td>
+                <td>228.00</td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>耗损出库</td>
+                <td>202.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab_con">
+        <div class="grid_head">
+          <table border="0" width="100%">
+            <tbody>
+              <tr class="g_thead">
+                <th width="10%" >科室</th>
+                <th width="10%" >操作类型</th>
+                <th width="30%" >药品名称</th>
+                <th width="10%" >规格</th>
+                <th width="10%" >数量</th>
+                <th width="10%" >单位</th>
+                <th width="10%" >成本金额</th>
+                <th width="10%">操作</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid_body">
+          <table border="0" width="100%">
+            <tbody>
+              <col width="10%" align="left" />
+              <col width="10%" align="left" />
+              <col width="30%" align="left" />
+              <col width="10%" align="left" />
+              <col width="10%" align="left" />
+              <col width="10%" align="left" />
+              <col width="10%" align="left" />
+              <col width="10%" align="left" />
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>柯蓝葡萄籽精华素.</td>
+                <td></td>
+                <td>1</td>
+                <td></td>
+                <td>100.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="1" attr_drug_id="35" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>替米沙坦片</td>
+                <td>40mg*14片</td>
+                <td>2</td>
+                <td>盒</td>
+                <td>30.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="1" attr_drug_id="982503" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>天麻胶囊</td>
+                <td>36粒</td>
+                <td>4</td>
+                <td>盒</td>
+                <td>48.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="1" attr_drug_id="982504" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>头孢丙烯干混悬剂（劲迪）</td>
+                <td>0.125g*6包</td>
+                <td>1</td>
+                <td>盒</td>
+                <td>25.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="1" attr_drug_id="982507" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>正常入库</td>
+                <td>妥布霉素滴眼液</td>
+                <td>5ml</td>
+                <td>8</td>
+                <td>盒</td>
+                <td>160.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="1" attr_drug_id="982509" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>期初入库</td>
+                <td>妥布霉素滴眼液</td>
+                <td>5ml</td>
+                <td>3</td>
+                <td>盒</td>
+                <td>60.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="4" attr_drug_id="982509" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>期初入库</td>
+                <td>小儿葵花咳喘口服液</td>
+                <td>2.5mg*10T</td>
+                <td>10</td>
+                <td>盒</td>
+                <td>168.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="4" attr_drug_id="982631" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>耗损出库</td>
+                <td>替米沙坦片</td>
+                <td>40mg*14片</td>
+                <td>2</td>
+                <td>盒</td>
+                <td>30.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="3" attr_drug_id="982503" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>耗损出库</td>
+                <td>天麻胶囊</td>
+                <td>36粒</td>
+                <td>6</td>
+                <td>盒</td>
+                <td>72.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="3" attr_drug_id="982504" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+              <tr class="g_tbody">
+                <td>药库</td>
+                <td>耗损出库</td>
+                <td>妥布霉素滴眼液</td>
+                <td>5ml</td>
+                <td>5</td>
+                <td>盒</td>
+                <td>100.00</td>
+                <td>
+                  <a attr_department_id="1" attr_type="3" attr_drug_id="982509" class="get_stock_detail" href="javascript:;">明细</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        
+      </div>
+    </div>
+  
+  </div>
+  <!---->
+</div>
+
+<script type="text/html">
+  var domain = "<?=$D->WEB_OUTSIDE_SITE_URL ?>",
+      department = <?=$D->department ?>,
+      drug_id = <?=$D->drug_id ?>,
+      type = "<?=$D->type ?>",
+      verify_date_start = "<?=$D->verify_date_start ?>",
+      verify_date_end = "<?=$D->verify_date_end ?>";
+</script>
+<!-- 原有JS -->
+<script src="../../src/js/jquery-1.10.2.min.js"></script>
+<script src="../../src/js/WdatePicker.js"></script>
+<!-- 新增JS -->
+<script src="../../src/js/stock_input/jquery-loading.js"></script>
+<script src="../../src/js/stock_input/jquery-inputtips.js"></script>
+<script src="../../src/js/stock_input/pop.js"></script>
+<script src="../../src/js/stock_input/myTab.js"></script>
+<script src="../../src/js/stock_input/mini-tpl.js"></script>
+<script src="../../src/js/stock_input/config.js"></script>
+<script src="../../src/js/stock_input/events_detail.js"></script>
+<script src="../../src/js/stock_input/stock_detail.js"></script>
+
+</body>
+</html>

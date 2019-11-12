@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 原有样式 -->
+  <link href="../../src/css/all.css" rel="stylesheet" >
+  <link href="../../src/css/UI.css" rel="stylesheet" >
+  <link href="../../src/css/style.css" rel="stylesheet" >
+  <link href="../../src/css/WdatePicker.css" rel="stylesheet" >
+  <link href="../../src/css/his.css" rel="stylesheet" >
+  <!-- 新增样式 -->
+  <link href="../../src/css/stock_input/pop.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/form.css" rel="stylesheet" >
+  <link href="../../src/css/stock_input/stock_input.css" rel="stylesheet" >
+
+</head>
+<body>
+
+<script  type="text/html">
+<%
+var d, drugInfo = data[data.length-1], _num = data.length-1;
+ %>
+<tr class="g_tbody" id="drug_<%=_num%>" >
+  <td><%=drugInfo.drug_name||""%></td>
+  <td><%=drugInfo.drug_spec||""%></td>
+  <td><%=drugInfo.batch_no||""%></td>
+  <td><%=drugInfo.product_date||""%></td>
+  <td><%=drugInfo.valid_date||""%></td>
+  <td><%=drugInfo.number||""%></td>
+  <td><%=drugInfo.drug_unit||""%></td>
+  <td><%=drugInfo.price_check||""%></td>
+  <td><%=drugInfo.price_sell||""%></td>
+  <td><%=drugInfo.drug_factory||""%></td>
+  <td class="drug_opt"><a attr_id="<%=drugInfo.drug_id%>" attr_num="<%=_num%>" href="javaScript:;" onclick="$.editDrug(this, <%=_num%>)">编辑</a>|<a attr_id="<%=drugInfo.drug_id%>" attr_num="<%=_num%>" href="javaScript:;" onclick="$.delDrug(this, <%=_num%>)">删除</a></td>
+</tr>
+</script>
+<script id="drugUpdate111"  type="text/html">
+<%
+var drugInfo = data;
+
+ %>
+<tr class="g_tbody" id="drug_<%=drugInfo.drug_id%>" >
+  <td><%=drugInfo.drug_name%></td>
+  <td><%=drugInfo.drug_spec%></td>
+  <td><%=drugInfo.batch_no%></td>
+  <td><%=drugInfo.product_date%></td>
+  <td><%=drugInfo.valid_date%></td>
+  <td><%=drugInfo.number%></td>
+  <td><%=drugInfo.drug_unit%></td>
+  <td><%=drugInfo.price_check%></td>
+  <td><%=drugInfo.price_sell%></td>
+  <td><%=drugInfo.drug_factory||""%></td>
+  <td class="drug_opt"><a attr_id="<%=drugInfo.drug_id%>" attr_num="" href="javaScript:;" onclick="$.editDrug(this)">编辑</a>|<a attr_id="<%=drugInfo.drug_id%>" attr_num="" href="javaScript:;" onclick="$.delDrug(this)">删除</a></td>
+</tr>
+</script>
+<div class="lk_inp_tps_box_list" >
+<table style="width: 100%">
+  <tbody><tr class="g_thead" >
+    <th>药品名称</th>
+    <th>规格</th>
+    <th>医嘱分类</th>
+    <th>单位</th>
+    <th>成本单价</th>
+    <th>零售单价</th>
+    <th>生产厂商</th>
+  </tr>
+  
+  <tr class="auto_complates" data-name="头孢丙烯干混悬剂（劲迪）">
+    <td>妥布霉素滴眼液</td>
+    <td>5ml</td>
+    <td></td>
+    <td>盒</td>
+    <td>20.00</td>
+    <td>20.00</td>
+    <td>比利时s.a.Alcon-Couvreur n.v.</td>
+  </tr>
+  
+  <tr class="auto_complates" data-name="头孢丙烯干混悬剂（劲迪）">
+    <td>头孢丙烯干混悬剂（劲迪）</td>
+    <td>0.125g*6包</td>
+    <td></td>
+    <td>盒</td>
+    <td>25.00</td>
+    <td>25.00</td>
+    <td>国药集团汕头金石制药有限公司</td>
+  </tr>
+  
+  </tbody></table>
+</div>
+<script>
+<%
+var j, len = data.length;
+if(!data || len == 0) {
+%>
+<tr class="g_tbody no_drug_list" >
+  <td class="" colspan="11">没有数据</td>
+</tr>
+<% } else {
+for(; j<len; j--){
+	var drugInfo = data[j];
+	%>
+<tr class="g_tbody" id="drug_<%=j%>" >
+  <td><%=drugInfo.drug_name||""%></td>
+  <td><%=drugInfo.drug_spec||""%></td>
+  <td><%=drugInfo.batch_no||""%></td>
+  <td><%=drugInfo.product_date||""%></td>
+  <td><%=drugInfo.valid_date||""%></td>
+  <td><%=drugInfo.number||""%></td>
+  <td><%=drugInfo.drug_unit||""%></td>
+  <td><%=drugInfo.price_check||""%></td>
+  <td><%=drugInfo.price_sell||""%></td>
+  <td><%=drugInfo.drug_factory||""%></td>
+  <td class="drug_opt"><a attr_id="<%=drugInfo.drug_id%>" attr_num="<%=j%>" href="javaScript:;" onclick="$.editDrug(this, <%=j%>)">编辑</a>|<a attr_id="<%=drugInfo.drug_id%>" attr_num="<%=j%>" href="javaScript:;" onclick="$.delDrug(this, <%=j%>)">删除</a></td>
+</tr>
+<% } } %>
+</script>
+<!-- 药品检索列表 -- 最终版 -->
+<script>
+<%
+var i=data.length;
+if(i == 0){
+%>
+<div class="nolist">没有找到这个药品</div>
+<%
+} else {
+var item = data[0];
+%>
+
+<div class="nolist"><%=item.goods_name||""%></div>
+
+<% } %>
+</script>
+
+<!-- 药品检索列表1 -->
+<script>
+<%
+var i=data.length;
+if(i == 0){
+%>
+<div class="nolist">没有找到这个药品</div>
+<%
+} else {
+%>
+<table style="width: 100%">
+    <tr>
+      <th  width="27%" >药品名称</th>
+      <th  width="10%">规格</th>
+      <th  width="9%">医嘱分类</th>
+      <th  width="9%">单位</th>
+      <th  width="9%">成本单价</th>
+      <th  width="9%">零售单价</th>
+      <th  width="27%">生产厂商</th>
+    </tr>
+  <%
+  for(; i>0; i--){
+  var item = data[i-1];
+  %>
+  <tr class="auto_complates" attr_id="<%=item.id||''%>" data-name="<%=item.goods_name||''%>">
+    <td><%=item.goods_name||""%></td>
+    <td><%=item.spec||""%></td>
+    <td><%=item.drug_type||""%></td>
+    <td><%=item.unit||""%></td>
+    <td><%=item.price_buy||""%></td>
+    <td><%=item.price||""%></td>
+    <td><%=item.factory||""%></td>
+  </tr>
+  <%}%>
+</table>
+<% } %>
+</script>
+<!-- 药品检索列表2 -->
+<script>
+<table style="width: 100%">
+  <tr>
+    <th>药品名称</th>
+    <th>规格</th>
+    <th>医嘱分类</th>
+    <th>单位</th>
+    <th>成本单价</th>
+    <th>零售单价</th>
+    <th>生产厂商</th>
+  </tr>
+  <% for(var i=data.length; i>0; i--){
+  var item = data[i];
+  if(i == 0){%>
+  <li data-world='<%=word%>' data-age="<%=item.age%>">我的名字是<%=item.name%>，我的年龄是<%=item.age%>,其他<%=item.other.aa%></li>
+  <%}else{%>
+  <tr class="auto_complates" data-name="头孢丙烯干混悬剂（劲迪）">
+    <td>item.goods_name</td>
+    <td>item.spec</td>
+    <td>item.drug_type</td>
+    <td>item.unit</td>
+    <td>item.price_buy</td>
+    <td>item.price</td>
+    <td>item.factory</td>
+  </tr>
+  <%}%>
+  <% } %>
+</table>
+</script>
+
+<!-- 弹出头部 -->
+
+<div class="pop_drug_head">
+  <span class="pop_drug_tit">编辑验收入库</span>
+  <a class="radius30 close" id="pop-close" href="javascript:;">x</a>
+</div>
+
+<!-- 弹出内容 -->
+
+<div id="stock_output" class="h_c_regist h_drugstore" >
+  <!-- 入库表单 -->
+  <div class="h_regist_head" >
+      <div class="stock_input clearf" >
+        <div class="form_group fl"> <span>出库科室：</span>
+          <div class="form_select">
+            <select id="get_department" class="select_3rd form_select" disabled >
+              <%
+              var i, departmentData = data.department_arr;
+              for(i in departmentData){
+              if(data.data.department_name == departmentData[i]) {
+              %>
+                  <option selected attr_id="<%=i%>" value="<%=i%>"><%=departmentData[i]%></option>
+                <%}else{%>
+                  <option attr_id="<%=i%>" value="<%=i%>"><%=departmentData[i]%></option>
+                <%}%>
+              <% } %>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" style="display: none"> <span>供货商：</span>
+          <div class="form_select">
+            <select id="get_supplier"  class="select_4th form_select" disabled>
+              <option attr_id="" value=""></option>
+              <%
+              var m, supplierData = data.supplier_arr;
+              for(m in supplierData){
+              if(data.data.supplier_name == supplierData[m]) {
+              %>
+              <option selected attr_id="<%=m%>" value="<%=m%>"><%=supplierData[m]%></option>
+              <%}else{%>
+              <option attr_id="<%=m%>" value="<%=m%>"><%=supplierData[m]%></option>
+              <%}%>
+              
+              <% } %>
+            </select>
+          </div>
+        </div>
+        <div class="form_group fl" >
+          <span>单据号：</span>
+          <%
+          var document_no = data.data.document_no;
+          var remark = data.data.remark;
+          if(!document_no) document_no = "";
+          if(!remark) remark = "";
+          %>
+          <input id="set_document_no" class="i_w190 form_text1" value="<%=document_no%>" type="text" name="txt_goods_name" placeholder="" disabled >
+        </div>
+        <div class="form_group fl"> <span>单据状态：</span>
+          <div class="form_select">
+            <select id="get_is_verify_arr"  class="select_3rd1 form_select" disabled>
+              <option attr_id="" value="">全部</option>
+              <%
+              var n, verifyData = data.is_verify_arr;
+              for(n in verifyData){
+              if(data.data.status_name == verifyData[n]) {
+              %>
+                <option selected attr_id="<%=n%>" value="<%=n%>"><%=verifyData[n]%></option>
+              <%}else{%>
+                <option attr_id="<%=n%>" value="<%=n%>"><%=verifyData[n]%></option>
+              <%}%>
+              <% } %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="stock_input clearf" >
+        <div class="form_group fl" >
+          <span>备注：</span>
+          <input class="i_w400 input_remark" value="<%=remark%>" type="text" name="txt_goods_name" placeholder="" autocomplete="off" >
+        </div>
+        <div class="form_group fl" >
+          <input id="save_stock_input" class="input_btn btn_b36 radius3" type="submit" value="保存">
+        </div>
+        <div class="form_group fl" >
+          <input id="audit_stock_input" class="input_btn btn_b36 radius3" type="submit" value="审核">
+        </div>
+        <div class="form_group fl" >
+          <input id="print_stock_input" class="input_btn btn_b36 radius3" disabled = "disabled" type="submit" value="打印">
+        </div>
+        <div class="form_group fl" >
+          <input id="clear_stock_input" class="input_btn btn_b36 radius3" type="submit" value="清空">
+        </div>
+        <div class="form_group fl" style="display: none" >
+          <input id="new_stock_input" class="input_btn btn_b36 radius3" type="submit" value="新建药品">
+        </div>
+      </div>
+  </div>
+  <!-- 添加药品 -->
+  <div class="add_drug0 clearf" >
+    <div class="col_md_2">
+      <div class="col_md_12">
+        <div class="form_group0" >
+          <lable>药品名称</lable>
+          <input id="drug_name" class="form_text" type="text" >
+        </div>
+      </div>
+    </div>
+    <div class="col_md_9">
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>批号</lable>
+          <input id="batch_no" class="form_text" type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" style="display: none" >
+          <lable>生产日期</lable>
+          <input id="product_date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd', maxDate:'%y-%M-%d'})" class="Wdate form_text " type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>有效期</lable>
+          <input id="valid_date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate form_text " type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>数量</lable>
+          <input id="drug_num" class="form_text" type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>单位</lable>
+          <input id="drug_unit" class="form_text" type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>成本单价</lable>
+          <input id="price_check" class="form_text" type="text" >
+        </div>
+      </div>
+      <div class="col_md_2">
+        <div class="form_group0" >
+          <lable>成本金额</lable>
+          <input id="price_sell" class="form_text" type="text" >
+        </div>
+      </div>
+    </div>
+    <div class="col_md_1">
+      <div class="station" ></div>
+      <button id="drugAdd" class="btn btn_primary" onclick="$.drugAdd();" >添加</button>
+      <button id="drugUpdate" class="btn btn_primary" onclick="$.drugUpdate(this);">修改</button>
+    </div>
+    
+  </div>
+  <!-- 药品列表 -->
+  <div class="h_pat_table h_drug_table" >
+    <table border="0" width="100%" >
+      <tbody id="drug_table">
+      <tr class="g_thead" >
+        <th width="8%" >药品名称</th>
+        <th width="8%" >规格</th>
+        <th width="11%" >批号</th>
+        <th width="6%" >生产日期</th>
+        <th width="6%" >有效期</th>
+        <th width="11%" >数量</th>
+        <th width="5%" >单位</th>
+        <th width="11%" >成本单价</th>
+        <th width="5%" >成本金额</th>
+        <th width="5%" >生产厂商</th>
+        <th width="9%" >操作</th>
+      </tr>
+      <%
+      var j, drugData = data.data.detail;
+      if(!drugData || drugData.length == 0) {
+      %>
+      <tr class="g_tbody no_drug_list" >
+        <td class="" colspan="11">没有数据</td>
+      </tr>
+      <% } else {
+      for(j in drugData){ %>
+      <tr class="g_tbody" id="drug_<%=j%>" >
+        <td><%=drugData[j].drug_name||""%></td>
+        <td><%=drugData[j].drug_spec||""%></td>
+        <td><%=drugData[j].batch_no||""%></td>
+        <td><%=drugData[j].product_date||""%></td>
+        <td><%=drugData[j].valid_date||""%></td>
+        <td><%=drugData[j].number||""%></td>
+        <td><%=drugData[j].drug_unit||""%></td>
+        <td><%=drugData[j].price_check||""%></td>
+        <td><%=drugData[j].price_total||""%></td>
+        <td><%=drugData[j].drug_factory||""%></td>
+        <td class="drug_opt"><a attr_id="<%=drugData[j].drug_id%>" attr_num="<%=j%>" href="javaScript:;" onclick="$.editDrug(this, <%=j%>)">编辑</a>|<a attr_id="<%=drugData[j].drug_id%>" attr_num="<%=j%>" href="javaScript:;" onclick="$.delDrug(this, <%=j%>)">删除</a></td>
+      </tr>
+      <% } } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 原有JS -->
+<script src="../../src/js/jquery-1.10.2.min.js"></script>
+<script src="../../src/js/WdatePicker.js"></script>
+<!-- 新增JS -->
+<script src="../../src/js/stock_input/jquery-inputtips.js"></script>
+<script src="../../src/js/stock_input/pop.js"></script>
+<script src="../../src/js/stock_input/mini-tpl.js"></script>
+<script src="../../src/js/stock_input/tpl.js"></script>
+<script src="../../src/js/stock_input/config.js"></script>
+<script src="../../src/js/stock_input/events.js"></script>
+<script src="../../src/js/stock_input/stock_input.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+
+
+	config ={
+		shopdata:{
+			data:{},
+			url:siteUrl + 'ajax_wechat_market_store',
+			beforeSend:function(){},
+			success:function(data){
+				shopdata(data);
+			},
+			complete:function(){}
+		},
+		changetitle:function(title){
+			document.title = title;
+		},
+		shoptitleHtml:$("#headnum").val(),
+		shoplistHtml:$("#itemhtml").val(),
+		unknowHtml:$("#unknowHtml").val(),
+		shopswiper:{},
+		yearswiper:{},
+		setRightbtn:function(text,fn){
+
+		},
+		careateYear:function(oldyear,oldmonth,newyear,newmonth){
+			var oy,om,ny,nm,html,hasyear,tempy;
+			oy =  parseInt(oldyear);
+			om = parseInt(oldmonth);
+			ny = parseInt(newyear);
+			nm = parseInt(newmonth);
+			hasyear = ny - oy ;
+
+			for(var i= 0 ; i <= hasyear; i++){
+				if(i == 0){
+					html = '<div class="swiper-slide" data-year="'+ oy +'" data-startmonth="'+ om +'">'+oy +'</div>';
+				}else if(i == hasyear){
+					html += '<div class="swiper-slide" data-year="'+ ny +'" data-endmonth="'+ nm +'">'+ ny +'</div>'
+				}else{
+					tempy = oy + i;
+					html += '<div class="swiper-slide" data-year="'+ tempy +'" >'+tempy +'</div>'
+				}
+			}
+			$("#year").html(html);
+		},
+		createMonth:function(month,type){
+			var html = '';
+			if(month){
+				if(type == 'start'){
+					for(var i = 1; i<=12; i++){
+						if(i < month){
+							if(i == 2 || i == 5 || i == 8 || i == 11){
+								html += ' <div class="popupdate_monthitem disabled popupdate_monthitem_center">'+ i +'月</div>'
+							}else{
+								html += ' <div class="popupdate_monthitem disabled">'+ i +'月</div>'
+							}
+						}else{
+							if(i == 2 || i == 5 || i == 8 || i == 11){
+								html += ' <div class="popupdate_monthitem  popupdate_monthitem_center">'+ i +'月</div>'
+							}else{
+								html += ' <div class="popupdate_monthitem ">'+ i +'月</div>'
+							}
+						}
+					}
+				}else{
+					for(var i = 1; i<=12; i++){
+						if(i > month){
+							if(i == 2 || i == 5 || i == 8 || i == 11){
+								html += ' <div class="popupdate_monthitem disabled popupdate_monthitem_center">'+ i +'月</div>'
+							}else{
+								html += ' <div class="popupdate_monthitem disabled">'+ i +'月</div>'
+							}
+						}else{
+							if(i == 2 || i == 5 || i == 8 || i == 11){
+								html += ' <div class="popupdate_monthitem  popupdate_monthitem_center">'+ i +'月</div>'
+							}else{
+								html += ' <div class="popupdate_monthitem ">'+ i +'月</div>'
+							}
+						}
+					}
+				}
+			}else{
+				for(var i = 1; i<=12; i++){
+					if(i == 2 || i == 5 || i == 8 || i == 11){
+						html += ' <div class="popupdate_monthitem popupdate_monthitem_center">'+ i +'月</div>'
+					}else{
+						html += ' <div class="popupdate_monthitem">'+ i +'月</div>'
+					}
+				}
+			}
+			$("#popupdate_month").html(html);
+		},
+		showdate:function(year){
+			$(".popupdate").show();
+			config.yearswiper.update();
+			var index = $("#year .swiper-slide[data-year ='"+year+"']").index();
+			config.yearswiper.slideTo(index,0);
+		}
+	}
+
+	config.yearswiper = new Swiper('.popupdate_year',{
+		navigation: {
+			nextEl: '.swiper-button-nexts',
+			prevEl: '.swiper-button-prevs',
+			disabledClass: 'swiper-button-disabled',
+		},
+		on:{
+			slideChangeTransitionStart: function(){
+				var sm = $("#year .swiper-slide-active").attr('data-startmonth');
+				var em = $("#year .swiper-slide-active").attr('data-endmonth');
+
+				if(sm){
+					sm = parseInt(sm);
+					config.createMonth(sm,'start')
+				}else if(em){
+					em = parseInt(em);
+					config.createMonth(em,'end')
+				}else{
+					config.createMonth(null)
+				}
+			},
+		}
+	});
+
+	$("#shophtml").html(config.unknowHtml);
+
+	//请求初始数据
+	dataload = false;
+	getpagedata(config.shopdata);
+
+
+	function shopdata(data){
+
+		var shopdata = data;
+		if(shopdata.res == 1){
+			//更改店铺名称
+			config.changetitle(shopdata.data.shop_name);
+
+			if(shopdata.data.total_shop > 0){
+				for( var i = 1; i< shopdata.data.total_shop; i++){
+					$("#shophtml").append(config.unknowHtml);
+				}
+				config.shopswiper = new Swiper('.swiper-shop',{
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+						disabledClass: 'swiper-button-disabled',
+					},
+				});
+				$(".swiper-button-prev").show();
+				$(".swiper-button-next").show();
+			};
+
+			var html = config.shoptitleHtml;
+			html = html.temp(shopdata.data);
+			$(".swiper-slide-active .wx_headers").html(html);
+			//创建年的节点
+			config.careateYear(shopdata.data.start_year,shopdata.data.start_month,shopdata.data.current_year,shopdata.data.current_month);
+			//判断是否请求列表ajax
+			if(!dataload){
+				console.log('需要请求列表');
+			}
+			dataload = true;
+		}else{
+			mobilediolog(
+				'错误提示',
+				data.msg,
+				function (obj) {
+				}, 1)
+		}
+	}
+	var datalist = [
+		{
+			img:'https://www.runoob.com/images/compatible_chrome.gif',
+			title:"罗每乐酸威阿莫罗芬搽剂",
+			guige:'0.25g*60片',
+			changjia:'东北制药厂',
+			yishou:52,
+			kucun:36,
+			share:'javascript:void(0)'
+		}
+	];
+
+	var bannerheight = $(".wx_headers")[0].clientHeight;
+
+	$(".wui_wrapper").scroll(function(){
+		if($(this).scrollTop() >= bannerheight){
+			$(".search_line").addClass('fixed');
+		}else{
+			$(".search_line").removeClass('fixed');
+		}
+	})
+	$(".popupclose").click(function(){
+		$(".popupdate").hide();
+	})
+
+
+	function mobilediolog(title, conment, callback, btnlength, btntext) {
+		var _diolog = '<div class="jd_diolog" style="opacity: 0;">';
+		_diolog += '<div class="jd_diolog_conment">';
+		_diolog += '<div class="jd_diolog_main">';
+		_diolog += ' <div class="jd_diolog_title">' + title + '</div>';
+		_diolog += ' <div class="jd_diolog_body">' + conment + '</div>';
+		_diolog += ' <div class="jd_diolog_foot">';
+		var btntype = btnlength == undefined ? 2 : btnlength;
+		var btntxt = btntext == undefined ? "关闭" : btntext;
+		if (btntype == 1) {
+			_diolog += '<a href="javascript:void(0)" class="jd_diolog_foot_full_btn Determinediolog">' + btntxt + '</a>';
+		} else {
+			_diolog += '<a href="javascript:void(0)" class="jd_diolog_foot_btn closediolog">取消</a>';
+			_diolog += '<a href="javascript:void(0)" class="jd_diolog_foot_btn Determinediolog">确定</a>';
+		}
+		_diolog += '</div></div></div><div class="jd_diolog_bg"></div></div>';
+		$("body").append(_diolog);
+		var thisheight = $(".jd_diolog_conment").outerHeight(true);
+		$(".jd_diolog_conment").css("margin-top", -(thisheight / 2) + 'px');
+		$(".jd_diolog").css("opacity", '1');
+		$("a.closediolog").click(function () {
+			$(this).parents(".jd_diolog").remove();
+		})
+		$("a.Determinediolog").click(function () {
+			if (typeof callback == 'function') {
+				var backfn = callback($(this).parents(".jd_diolog"));
+				if (backfn == false) {
+					return;
+				}
+			}
+			$(this).parents(".jd_diolog").remove();
+		})
+	}
+	//    var totalpage = 100;
+	//    var thispage = 1;
+	//    var dropup;
+	//    getdata();
+	//
+	//    function getdata(){
+	//        setTimeout(function(){
+	//            var html ='';
+	//            for(var i=0; i< 10; i++){
+	//                var t= i+1;
+	//                html += '<li>当前第'+ thispage+'页，第'+ t +'条数据</li>'
+	//            }
+	//            $(".listscrolldiv").append(html);
+	//
+	//            if(thispage == 1){
+	//                dropup = new drop_up($(".listscroll"),{
+	//                    Enable:true,
+	//                    scrolldom:$(".list"),
+	//                    offset:100,
+	//                    totalpage:totalpage,
+	//                    thispage:thispage,
+	//                    callback:function(){
+	//                        if(thispage >= totalpage){
+	//                            dropup.end("暂无更多消息")
+	//                        }else{
+	//                            thispage += 1;
+	//                            getdata()
+	//                        }
+	//                    },
+	//                })
+	//            }else{
+	//                dropup.back(thispage,totalpage)
+	//            }
+	//
+	//
+	//        },1000)
+	//    }
+
+</script>
+
+</body>
+</html>

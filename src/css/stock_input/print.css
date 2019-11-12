@@ -1,0 +1,61 @@
+/* 基本样式 */
+* { margin: 0; padding: 0; }
+/* 浮动 */
+.fl { float: left; }
+.fr { float: right; }
+
+/* 清浮动 */
+.clearfix {
+    zoom: 1;
+    /*overflow-x:hidden;  --勿改，页面显示有影响-- */
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+/* 打印展示 */
+.noprint { text-align:right; position:absolute; top:6px; right:20px; line-height:22px; font-size:14px; }
+.print { display: none; }
+#stamp { margin: 0 auto; width: 980px; }
+
+/* 布局 基本设置 */
+.prt { width: 100%; }
+.prt_tit { width: 100%; text-align: center; font-size: 18px; line-height: 36px; }
+.prt_head { width: 100%; font-size: 14px; line-height: 30px; }
+.prt_table { width: 100%; font-size: 14px; margin: 10px 0; }
+.prt_table table { width: 100%; }
+.prt_table table th { text-align: center; padding: 5px 0; }
+.prt_table table td { padding: 5px 3px; }
+.prt_table table th, .prt_table table td { border: 1px #000 solid; }
+.prt_foot { width: 100%; font-size: 14px; }
+
+/* 表头和表尾 列排列 */
+.col_md { float: left; }
+
+/*border-collapse表格多边重复 table样式*/
+.b_collapse { border-collapse:collapse; border-spacing: 0; }
+
+/* 头尾调整 */
+.prt_head .col_md { padding-left: 30px; }
+.prt_head .col_md.fr { float: right; padding-right: 30px; }
+.prt_foot .col_md { padding-left: 40px; }
+.prt_foot .col_md.fr { float: right; padding-right: 30px; }
+
+/* 不需要打印按钮样式 */
+@media print {
+    .noprint {
+        display: none
+    }
+    .print { display: block; }
+    #stamp { display: none; }
+    .print #stamp { display: block; }
+}
+
+
+

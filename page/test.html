@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../src/js/jquery-1.10.2.min.js"></script>
+  <script src="../src/js/test.js"></script>
+  <script src="../src/js/stock_input/config.js"></script>
+  
+  <style type="text/css">
+    .h_pat_table .g_tbody td { text-align: left; }
+    .h_pat_table .g_tbody td input { float: inherit; }
+    .h_pat_table .g_tbody td input[type="text"] { height: 24px; line-height: 24px; padding: 5px;font-size: 14px; color: #555; width: 180px;
+    }
+    .h_pat_table .g_tbody td input[type="radio"] { float: inherit; width: 30px; margin-left: 10px; }
+    .h_pat_table .g_tbody td { padding-left: 10px; }
+    .h_pat_table .g_tbody td.setparam { text-align: right; padding-right: 10px; }
+  
+  </style>
+  
+</head>
+<body>
+
+
+<input id="aaa" type="text" style="border: 1px #000 solid;" >
+
+<script>
+  /*
+	get_cap_status();
+		getTest();
+		
+		// var arr = [1, 2, 3, 4, 5, 6, 7];
+		var arr = [];
+		
+		var i = arr.length;
+		var html = "";
+		for(;i>0;i--){
+			console.log(i);
+			html += "<div>'"+i+"'</div>";
+		}
+		$("body").html(html);
+		
+		var aa = [];
+		aa.push("1");
+		aa.push("2");
+		console.log(aa);
+*/
+		// $("#aaa").on("input propertychange", function () {
+		// 	var v = $(this).val();
+		// 	console.log(v);
+		// 	console.log(/^([1-9][0-9]*)+(.[0-9]{1,2})?$/.test(v));
+		// 	$(this).resetInput(/^([1-9]+|0)\.\d{2}$/g);
+		// 	// resetInput(/[^0-9]/ig)
+		// });
+
+ /*
+	var a = '0.1w';
+	var v = a.replace(/([1-9]+|0)\.\d{2}$/g, "###");
+	var v1 = a.replace(/^\d+$|^\d*\.\d+$/g, "###");
+	console.log("v", v);
+	console.log("v1", v1);
+	console.log(a);
+
+	function check_is_num(val, id)
+	{
+		var v = val;
+		console.log(v);
+		$("#" + id).val(val.replace(/[^\.\d]/g,''));
+
+		if(val.split('.').length>1)
+		{
+			$("#" + id).val( val.split('.')[0]);
+		}
+	}
+
+	// check_is_num("01.11", "aaa");
+*/
+	function num(v) {
+		v = v.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+		v = v.replace(/^\./g, ""); //验证第一个字符是数字
+		v = v.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+		v = v.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+		v = v.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+      return v;
+	}
+	console.log(num("00001.1.sdf4546546541"));
+
+	function test(v) {
+			var inputVal = v
+			console.log(inputVal);
+			if (inputVal!="" && inputVal.indexOf(".") < 0){
+                inputVal = parseFloat(inputVal);
+            } else {
+                inputVal = parseFloat(inputVal);
+                inputVal.toFixed(2);
+            }
+		return inputVal;
+		}
+
+	console.log(1, test("000014545.21212asd"));
+
+
+</script>
+
+</body>
+</html>

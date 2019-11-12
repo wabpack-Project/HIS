@@ -1,0 +1,37 @@
+/* CSS Document */
+/* UI 优化样式 */
+@import url("UI-N.min.css");
+html { font-size:12px; } 
+.fl { float: left; _display: inline-block; display:inline-block; }
+body, h3 { margin:0; padding:0 20px; font-size:12px; }
+th { font-style:normal; }
+.noprint { text-align:right; position:absolute; top:6px; right:20px; line-height:22px; font-size:14px; }
+/* 公卫 */
+.p_tit { padding:10px 0; }
+.p_item_list { padding-left:84px; }
+/* 间距 */
+.space_r20 { padding-right:15px; }
+.space_r15 { padding-right:10px; }
+.space_r10 { padding-right:10px; }
+.space_r5 { padding-right:5px; }
+/*字节数*/
+.byte1 { width:22px; }
+.byte4 { width:70px; }
+/*表头*/
+#stamp { color:#000; }
+#stamp h3 { padding-top:10px; }
+#stamp tr td:first-child { text-align:center; }
+#stamp td { padding:3px 5px; }
+#stamp .baseinfo { padding:0 20px 5px; } 
+#stamp .baseinfo b { font-size:14px; float:left; padding-right:5px; }
+#stamp .baseinfo input { margin-left:5px; }
+#stamp .whole_b td { border:1px #000 solid; font-size:14px; }
+#stamp .baseinfo .p_select { line-height:24px; font-size:18px; } 
+#stamp .p_select input[type="text"] { margin-right:5px; } 
+#stamp .p_item { font-size:14px; }
+
+
+
+
+
+

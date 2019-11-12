@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../../src/css/stock_input/print.css" rel="stylesheet" >
+  <script src="../../src/js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div class="noprint">
+  <a href="#" >
+    打印
+  </a>
+</div>
+
+<!-- 打印部分内容 -->
+
+<div id="stamp" >
+  <div class="prt">
+    <%
+    var printInfo = data,
+    department_name = printInfo.department_name,
+    tit = printInfo.type_name,
+    document_no = printInfo.document_no,
+    sum_price = printInfo.fee_check && printInfo.fee_check+"元",
+    verify_name = printInfo.verify_name,
+    verify_date = printInfo.verify_date;
+    %>
+    <!-- 名称 -->
+    <div class="prt_tit" >药品<%=tit||""%>单</div>
+    <!-- 表头信息 -->
+    <div class="prt_head clearfix" >
+      <div class="col_md">出库科室：<%=department_name||""%></div>
+      <div class="col_md fr">验收单号：<%=document_no||""%></div>
+    </div>
+    <!-- 表格 -->
+    <div class="prt_table" >
+      <table class="b_collapse" >
+        <tr class="g_thead">
+          <th width="24%" >药品名称</th>
+          <th width="8%" >规格</th>
+          <th width="8%" >批号</th>
+          <th width="13%" >有效期</th>
+          <th width="6%" >数量</th>
+          <th width="8%" >单位</th>
+          <th width="9%" >成本单价</th>
+          <th width="24%" >生产厂商</th>
+        </tr>
+        <%
+        var j = 0, len = printInfo.detail.length;
+        if(len == 0) {
+        %>
+        <tr class="g_tbody no_drug_list" >
+          <td class="" colspan="8">没有数据</td>
+        </tr>
+        <% } else {
+        for(; j < len; j++){
+        var detail = printInfo.detail[j];
+        %>
+        <tr class="g_tbody">
+          <td><%=detail.drug_name||""%></td>
+          <td><%=detail.drug_spec||""%></td>
+          <td><%=detail.batch_no||""%></td>
+          <td><%=detail.valid_date||""%></td>
+          <td><%=detail.number||""%></td>
+          <td><%=detail.drug_unit||""%></td>
+          <td><%=detail.price_check||""%></td>
+          <td><%=detail.drug_factory||""%></td>
+        </tr>
+        <% } } %>
+      </table>
+    </div>
+    <!-- 表尾信息 -->
+    <div class="prt_foot" >
+      <div class="col_md">成本总金额：<%=sum_price||""%></div>
+      <div class="col_md">出库人员：<%=verify_name||""%></div>
+      <div class="col_md">出库时间：<%=verify_date||""%></div>
+    </div>
+  </div>
+</div>
+
+<div class="print" >
+
+</div>
+
+<script>
+  $(".noprint a").click(function () {
+  	// 判断打印内容是否存在
+    if ($(".print").find(".prt").length < 1) {
+      $(".print").append($(".prt").clone());
+    }
+    window.print();
+  });
+
+</script>
+
+</body>
+</html>

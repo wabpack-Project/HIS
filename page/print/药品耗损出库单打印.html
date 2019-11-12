@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../../src/css/stock_input/print.css" rel="stylesheet" >
+  <script src="../../src/js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div class="noprint">
+  <a href="#" >
+    打印
+  </a>
+</div>
+
+<!-- 打印部分内容 -->
+
+<div id="stamp" >
+  <div class="prt">
+    <!-- 名称 -->
+    <div class="prt_tit" >药品耗损出库单</div>
+    <!-- 表头信息 -->
+    <div class="prt_head clearfix" >
+      <div class="col_md">出库科室：西药库</div>
+      <div class="col_md fr">验收单号：19081300033</div>
+    </div>
+    <!-- 表格 -->
+    <div class="prt_table" >
+      <table class="b_collapse" >
+        <tr class="g_thead">
+          <th width="24%" >药品名称</th>
+          <th width="8%" >规格</th>
+          <th width="8%" >批号</th>
+          <th width="12%" >有效期</th>
+          <th width="6%" >数量</th>
+          <th width="8%" >单位</th>
+          <th width="9%" >成本单价</th>
+          <th width="25%" >生产厂商</th>
+        </tr>
+        <tr class="g_tbody">
+          <td>妥布霉素滴眼液</td>
+          <td>5ml</td>
+          <td>1</td>
+          <td>2019-08-22</td>
+          <td>1</td>
+          <td>盒</td>
+          <td>20.00</td>
+          <td>比利时s.a.Alcon-Couvreur n.v.</td>
+        </tr>
+      </table>
+    </div>
+    <!-- 表尾信息 -->
+    <div class="prt_foot" >
+      <div class="col_md">成本总金额：19.00元</div>
+      <div class="col_md">出库人员：药房人员</div>
+      <div class="col_md">出库时间：2019-08-22</div>
+    </div>
+  </div>
+</div>
+
+<div class="print" >
+
+</div>
+
+<script>
+  $(".noprint a").click(function () {
+  	// 判断打印内容是否存在
+    if ($(".print").find(".prt").length < 1) {
+      $(".print").append($(".prt").clone());
+    }
+    window.print();
+  });
+
+</script>
+
+</body>
+</html>

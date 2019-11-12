@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../../src/css/stock_input/print.css" rel="stylesheet" >
+  <script src="../../src/js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div class="noprint">
+  <a href="#" >
+    打印
+  </a>
+</div>
+
+<!-- 打印部分内容 -->
+
+<div id="stamp" >
+  <div class="prt">
+    <%
+    var printInfo = data,
+        sum_price = printInfo.sum_price,
+        verify_date_start = printInfo.verify_date_start,
+        verify_date_end = printInfo.verify_date_end;
+    %>
+    <!-- 名称 -->
+    <div class="prt_tit" >药品清单</div>
+    <!-- 表头信息 -->
+    <div class="prt_head clearfix" >
+      <div class="col_md">开始时间：<%=verify_date_start%></div>
+      <div class="col_md">结束时间：<%=verify_date_end%></div>
+    </div>
+    <!-- 表格 -->
+    <div class="prt_table" >
+      <table class="b_collapse" >
+        <tr class="g_thead">
+          <th width="10%" >科室</th>
+          <th width="10%" >操作类型</th>
+          <th width="35%" >药品名称</th>
+          <th width="15%" >规格</th>
+          <th width="10%" >数量</th>
+          <th width="10%" >单位</th>
+          <th width="10%" >成本金额</th>
+        </tr>
+        <%
+        var j = 0, len = printInfo.detail.length;
+        if(len == 0) {
+        %>
+        <tr class="g_tbody no_drug_list" >
+          <td class="" colspan="7">没有数据</td>
+        </tr>
+        <% } else {
+        for(; j < len; j++){
+        var detail = printInfo.detail[j];
+        %>
+        <tr class="g_tbody">
+          <td><%=detail.department_name||""%></td>
+          <td><%=detail.type_name||""%></td>
+          <td><%=detail.drug_name||""%></td>
+          <td><%=detail.drug_spec||""%></td>
+          <td><%=detail.number||""%></td>
+          <td><%=detail.drug_unit||""%></td>
+          <td><%=detail.fee_check||""%></td>
+        </tr>
+        <% } } %>
+      </table>
+    </div>
+    <!-- 表尾信息 -->
+    <div class="prt_foot" >
+      <div class="col_md fr">成本金额：<%=sum_price%>元</div>
+    </div>
+  </div>
+</div>
+
+<div class="print" >
+
+</div>
+
+<script>
+  $(".noprint a").click(function () {
+  	// 判断打印内容是否存在
+    if ($(".print").find(".prt").length < 1) {
+      $(".print").append($(".prt").clone());
+    }
+    window.print();
+  });
+
+</script>
+
+</body>
+</html>

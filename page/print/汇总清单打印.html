@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../../src/css/stock_input/print.css" rel="stylesheet" >
+  <script src="../../src/js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div class="noprint">
+  <a href="#" >
+    打印
+  </a>
+</div>
+
+<!-- 打印部分内容 -->
+
+<div id="stamp" >
+  <div class="prt">
+    <!-- 名称 -->
+    <div class="prt_tit" >汇总清单</div>
+    <!-- 表头信息 -->
+    <div class="prt_head clearfix" >
+      <div class="col_md">开始时间：2019-08-14</div>
+      <div class="col_md">结束时间：2019-08-14</div>
+    </div>
+    <!-- 表格 -->
+    <div class="prt_table" >
+      <table class="b_collapse" >
+        <tr class="g_thead">
+          <th width="32%" >科室</th>
+          <th width="34%" >操作类型</th>
+          <th width="34%" >成本金额</th>
+        </tr>
+        <tr class="g_tbody">
+          <td>西药库</td>
+          <td>其它入库</td>
+          <td>20.00</td>
+        </tr>
+      </table>
+    </div>
+    <!-- 表尾信息 -->
+    <div class="prt_foot" >
+      <div class="col_md fr">成本金额：19.00元</div>
+    </div>
+  </div>
+</div>
+
+<div class="print" >
+
+</div>
+
+<script>
+  $(".noprint a").click(function () {
+  	// 判断打印内容是否存在
+    if ($(".print").find(".prt").length < 1) {
+      $(".print").append($(".prt").clone());
+    }
+    window.print();
+  });
+
+</script>
+
+</body>
+</html>

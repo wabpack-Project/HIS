@@ -1,0 +1,135 @@
+/* 设置输入框在 */
+/**, *:before, *:after {*/
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+/*}*/
+
+/* 布局 */
+.col_md_1, .col_md_2, .col_md_3, .col_md_4, .col_md_5, .col_md_6, .col_md_7, .col_md_8, .col_md_9, .col_md_12 .col_md_10 { float: left; }
+
+.col_md_1 { width: 8.33333333% }
+.col_md_2 { width: 16.66666667%; }
+.col_md_3 { width: 25%; }
+.col_md_5 {
+    width: 41.66666667%;
+}
+.col_md_7 {
+    width: 58.33333333%;
+}
+.col_md_8 { width: 66.66666667%; }
+.col_md_9 { width: 75%; }
+.col_md_10 { width: 80%; }
+.col_md_12 { width: 100%; }
+.col-sm-12 {
+    width: 100%;
+}
+/* 宽度 */
+.i_w190 { width: 202px !important; }
+.i_w400 { width: 400px !important; }
+
+/* 按钮不可用时样式 */
+.input_btn[disabled] { cursor: not-allowed; filter: alpha(opacity=65); -webkit-box-shadow: none; box-shadow: none; opacity: .65; }
+
+.form_text1[disabled] { cursor: not-allowed; background-color: #eee; opacity: 1; }
+
+/* 弹出头部 */
+.pop_drug_head {     padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.pop_drug_tit {
+    margin: 0;
+    line-height: 1.42857143;
+    font-size: 18px;
+}
+#pop-close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    color: #666;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* 入库表单 */
+.form_select select { min-width: 210px; }
+.form_group input.Wdate { margin-right: 0px !important; }
+.form_group span { width: 80px; text-align: right; }
+.form_group em { padding:0 5px; }
+.form_group input[type="text"] { height: 22px; margin-right: 0; }
+.stock_input .input_btn { margin-left: 10px; }
+.btn_b36 { height: 34px; line-height: 34px; }
+.h_pat_table .g_thead { background: #f4f4f4; }
+.h_pat_table .g_thead th { line-height: 22px; height: auto; padding: 8px 0; }
+
+/* 添加药品 */
+.add_drug0 * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.add_drug0 { background: #f4f4f4; padding: 10px; }
+.add_drug0 .form_group0 { padding-right: 20px; }
+.add_drug0 .Wdate { height: 34px; border: 1px solid #ccc; }
+.form_group0 lable { line-height: 20px; margin-bottom: 5px; }
+.station { height: 20px; margin-bottom: 5px; }
+.h_regist_head {
+    padding: 14px 20px;
+}
+.modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+#drugUpdate { display: none; }
+.drug_opt a { padding: 0 5px; }
+
+/* 输入联想没有数据时样式 */
+.nolist{
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+/* 输入联想检索结果药品列表 */
+.lk_inp_tps_box {
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+.lk_inp_tps_box_list { width: 100%; }
+.lk_inp_tps_box_list table { border-collapse:collapse; border-bottom: 1px #e6e6e6 solid; }
+.lk_inp_tps_box_list td { border: 1px #e6e6e6 solid; padding: 3px 4px; }
+.lk_inp_tps_box_list th { border: 1px #e6e6e6 solid; background: #f9f9f9; padding: 3px 2px; line-height: 20px; }
+.lk_inp_tps_box_list tr:hover { background-color: #28a3ef; }
+.lk_inp_tps_box_list tr:hover td { color: #fff; }
+.lk_inp_tps_box_list .g_thead { background: #f4f4f4; }
+.lk_inp_tps_box_list tbody {}
+
+/* 出入库统计 */
+.grid_head { border-bottom: 1px #e6e6e6 solid; }
+.grid_head table { border: none; }
+.grid_head .g_thead { border-bottom: none; }
+.grid_body .g_tbody { border-bottom: none; }
+.grid_body table { border-top: none; }
+.tab_body { border: 1px #e6e6e6 solid; }
+.tab_other { font-size: 18px; color: #f00; line-height: 38px; }
+/* 弹出表格滚动 */
+.h_drug_table { max-height: 280px; overflow-y: scroll; }
+
+/* 不需要打印按钮样式 */
+@media print {
+    .header { display: none; }
+    .h_main.h_center { display: none; }
+    .h_c_regist.h_drugstore { display: none; }
+    #pop-mask { display: none; }
+    #pop-out { display: none; }
+}
+
+
